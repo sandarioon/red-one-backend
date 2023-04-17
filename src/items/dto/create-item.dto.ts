@@ -11,7 +11,7 @@ export class CreateItemDto {
   readonly description: string;
 
   @IsString()
-  readonly imageURL: string;
+  readonly image: string;
 
   @IsNumber()
   @Type(() => Number)

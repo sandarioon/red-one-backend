@@ -2,17 +2,18 @@ import { Injectable, Inject } from '@nestjs/common';
 import { News } from './news.entity';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
+import { FilesService } from 'src/files/files.service';
 
 @Injectable()
 export class NewsService {
   constructor(
     @Inject('NewsRepository')
     private readonly newsRepository: typeof News,
+    private readonly fileService: FilesService,
   ) {}
 
   async getAllNews() {
     const data = await this.newsRepository.findAll({});
-    console.log(data);
     return data;
   }
 
@@ -20,12 +21,15 @@ export class NewsService {
     return await this.newsRepository.findByPk(id);
   }
 
-  async addNews(createNewsDto: CreateNewsDto) {
+  async addNews(createNewsDto: CreateNewsDto, image: any) {
+    const fileName = await this.fileService.createFile(image);
+    console.log('fileName', fileName);
     const { title, body, hidden } = createNewsDto;
     return await this.newsRepository.create({
       title,
       body,
-      hidden,
+      hidden: hidden || 'false',
+      image: fileName,
     });
   }
 

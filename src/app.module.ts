@@ -1,7 +1,10 @@
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+import * as path from 'path';
 
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { FilesModule } from './files/files.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ModificationsModule } from './modifications/modifications.module';
 import { ItemsModule } from './items/items.module';
@@ -27,10 +30,14 @@ import { News } from './news/news.entity';
       models: [Category, Item, Modification, News],
       autoLoadModels: true,
     }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, '../static'),
+    }),
     CategoriesModule,
     ItemsModule,
     ModificationsModule,
     NewsModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [],

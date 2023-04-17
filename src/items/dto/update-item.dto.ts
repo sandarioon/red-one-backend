@@ -14,7 +14,7 @@ export class UpdateItemDto {
 
   @IsOptional()
   @IsString()
-  readonly imageURL: string;
+  readonly image: string;
 
   @IsOptional()
   @IsNumber()

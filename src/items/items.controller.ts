@@ -25,7 +25,7 @@ export class ItemsController {
     return await this.itemsService.getItem(id);
   }
 
-  @Post('/add')
+  @Post('/create')
   async addItem(@Body() createItemDto: CreateItemDto) {
     return await this.itemsService.addItem(createItemDto);
   }
@@ -40,7 +40,6 @@ export class ItemsController {
     @Param('id') id: string,
     @Body() updateItemDto: UpdateItemDto,
   ) {
-    console.log(typeof updateItemDto.categoryId);
     return await this.itemsService.updateItem(id, updateItemDto);
   }
 }

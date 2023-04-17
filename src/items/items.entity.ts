@@ -25,7 +25,7 @@ export class Item extends Model {
   description: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  imageURL: string;
+  image: string;
 
   @ForeignKey(() => Category)
   @Column({

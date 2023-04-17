@@ -16,6 +16,9 @@ export class News extends Model {
   @Column({ type: DataType.STRING, allowNull: false })
   body: string;
 
+  @Column({ type: DataType.STRING, allowNull: true })
+  image: string;
+
   @Default(false)
   @Column({
     type: DataType.BOOLEAN,

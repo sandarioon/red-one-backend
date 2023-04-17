@@ -14,4 +14,8 @@ export class UpdateNewsDto {
   @IsBoolean()
   @Transform(({ value }) => value === 'true')
   readonly hidden: boolean;
+
+  @IsOptional()
+  @IsString()
+  readonly image: string;
 }

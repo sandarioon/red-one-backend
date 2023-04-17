@@ -25,15 +25,15 @@ export class ModificationsController {
     return await this.modificationsService.getModification(id);
   }
 
-  @Post('/add')
-  async addCategory(@Body() createModificationDto: CreateModificationDto) {
+  @Post('/create')
+  async addModification(@Body() createModificationDto: CreateModificationDto) {
     return await this.modificationsService.addModification(
       createModificationDto,
     );
   }
 
   @Delete(':id')
-  async deleteItem(@Param('id') id: string) {
+  async deleteModification(@Param('id') id: string) {
     return await this.modificationsService.deleteModification(id);
   }
 

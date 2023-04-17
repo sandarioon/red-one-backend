@@ -1,4 +1,4 @@
-import { IsString, IsBoolean } from 'class-validator';
+import { IsString, IsBoolean, IsOptional } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class CreateNewsDto {
@@ -8,6 +8,7 @@ export class CreateNewsDto {
   @IsString()
   readonly body: string;
 
+  @IsOptional()
   @IsBoolean()
   @Transform(({ value }) => value === 'true')
   readonly hidden: boolean;

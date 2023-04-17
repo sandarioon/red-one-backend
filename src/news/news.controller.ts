@@ -6,10 +6,13 @@ import {
   Param,
   Post,
   Put,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('news')
 export class NewsController {
@@ -25,13 +28,17 @@ export class NewsController {
     return await this.newsService.getNews(id);
   }
 
-  @Post('/add')
-  async addCategory(@Body() createNewsDto: CreateNewsDto) {
-    return await this.newsService.addNews(createNewsDto);
+  @Post('/create')
+  @UseInterceptors(FileInterceptor('image'))
+  async addNews(
+    @Body() createNewsDto: CreateNewsDto,
+    @UploadedFile() image: Express.Multer.File,
+  ) {
+    return await this.newsService.addNews(createNewsDto, image);
   }
 
   @Delete(':id')
-  async deleteItem(@Param('id') id: string) {
+  async deleteNews(@Param('id') id: string) {
     return await this.newsService.deleteNews(id);
   }
 
